@@ -4,9 +4,14 @@ const { mudverseABI } = require('./abi')
 const MUDVERSE_ADDRESS = "0x0c07150e08e5deCfDE148E7dA5A667043F579AFC"
 
 class Mudverse {
-    constructor(rpcProvider) {
-        const jsonRpc = new ethers.providers.JsonRpcProvider(rpcProvider)
-        const mudverse = new ethers.Contract(MUDVERSE_ADDRESS, mudverseABI, jsonRpc)
+    constructor(provider) {
+        let mudverse;
+        if (typeof(provider) === 'string') {
+            const jsonRpc = new ethers.providers.JsonRpcProvider(rpcProvider)
+            mudverse = new ethers.Contract(MUDVERSE_ADDRESS, mudverseABI, jsonRpc)
+        } else {
+            mudverse = new ethers.Contract(MUDVERSE_ADDRESS, mudverseABI, mudverse)
+        }
 
         this.mudverse = mudverse;
     }
