@@ -7,10 +7,10 @@ class Mudverse {
     constructor(provider) {
         let mudverse;
         if (typeof(provider) === 'string') {
-            const jsonRpc = new ethers.providers.JsonRpcProvider(rpcProvider)
+            const jsonRpc = new ethers.providers.JsonRpcProvider(provider)
             mudverse = new ethers.Contract(MUDVERSE_ADDRESS, mudverseABI, jsonRpc)
         } else {
-            mudverse = new ethers.Contract(MUDVERSE_ADDRESS, mudverseABI, mudverse)
+            mudverse = new ethers.Contract(MUDVERSE_ADDRESS, mudverseABI, provider)
         }
 
         this.mudverse = mudverse;
